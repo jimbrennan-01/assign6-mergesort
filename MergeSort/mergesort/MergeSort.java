@@ -24,7 +24,27 @@ public class MergeSort {
 		System.out.printf("]\n");
 	}
 	
-
+	public static void partition(int[] arr, int left, int right) {
+		int mid = (left + right)/2;
+		int[] leftArr = new int[mid];
+		int[] rightArr = new int[right - mid];
+		for(int i = 0; i < arr.length; i++) {
+			if(i < mid) {
+				leftArr[i] = arr[i];
+			}else {
+				rightArr[i] = arr[i];
+			}
+		}
+	}
+	public static int[] merge(int[] arrA, int[] arrB) {
+		int[] newArr = new int[arrA.length + arrB.length];
+		for(int i = 0; i < newArr.length; i++) {
+			if(arrA[i] == arrB[i]) {
+				
+			}
+		}
+		return newArr;
+	}
 	
 	private static void mergeSort(int[] theArray, int left, int right) {
 		//**************************************************************
@@ -36,6 +56,9 @@ public class MergeSort {
 		//*  4. Replace the original array section with the merged     *
 		//*     array.                                                 *
 		//**************************************************************
+		if(left <= right) {
+			
+		}
 
 	}
 	
