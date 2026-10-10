@@ -24,24 +24,30 @@ public class MergeSort {
 		System.out.printf("]\n");
 	}
 	
-	public static void partition(int[] arr, int left, int right) {
-		int mid = (left + right)/2;
-		int[] leftArr = new int[mid];
-		int[] rightArr = new int[right - mid];
-		for(int i = 0; i < arr.length; i++) {
-			if(i < mid) {
-				leftArr[i] = arr[i];
-			}else {
-				rightArr[i] = arr[i];
-			}
-		}
-	}
 	public static int[] merge(int[] arrA, int[] arrB) {
 		int[] newArr = new int[arrA.length + arrB.length];
-		for(int i = 0; i < newArr.length; i++) {
-			if(arrA[i] == arrB[i]) {
-				
+		int arrAIndex = 0;
+		int arrBIndex = 0;
+		int i = 0;
+		while(arrAIndex < arrA.length && arrBIndex < arrB.length) {
+			if(arrA[arrAIndex] <= arrB[arrBIndex]) {
+				newArr[i] = arrA[arrAIndex];
+				arrAIndex++;
+			}else {
+				newArr[i] = arrB[arrBIndex];
+				arrBIndex++;
 			}
+			i++;
+		}
+		while (arrAIndex < arrA.length) {
+			newArr[i] = arrA[arrAIndex];
+			arrAIndex++;
+			i++;
+		}
+		while (arrBIndex < arrB.length) {
+			newArr[i] = arrB[arrBIndex];
+			arrBIndex++;
+			i++;
 		}
 		return newArr;
 	}
@@ -56,8 +62,30 @@ public class MergeSort {
 		//*  4. Replace the original array section with the merged     *
 		//*     array.                                                 *
 		//**************************************************************
-		if(left <= right) {
+		if(left < right) {
+			int mid = (left + right) / 2;
 			
+			mergeSort(theArray, left, mid);        
+			mergeSort(theArray, mid + 1, right);
+			
+			int[] leftArr = new int[mid - left + 1];
+			int[] rightArr = new int[right - mid];
+			
+			for(int i = left; i <= right; i++) {
+				if(i <= mid) {
+					leftArr[i - left] = theArray[i];
+				}else {
+					rightArr[i - mid - 1] = theArray[i];
+				}
+			}
+			
+			int[] merged = merge(leftArr, rightArr);
+			
+			for(int k = 0; k < merged.length; k++) {
+				theArray[left + k] = merged[k];
+			}
+
+	
 		}
 
 	}
